@@ -71,7 +71,7 @@ def text(message):
                 bot.send_photo(message.chat.id, open(
                     "/script/Egor/" + answer, "rb"), reply_markup=markup)
             except:
-                time.sleep(5)
+                time.sleep(1)
         elif (vibor == "Egor"):
             if (len(os.listdir("/script/Sonya/")) == 0):
                 bot.send_message(message.chat.id, "Ещё пока пусто")
@@ -81,7 +81,7 @@ def text(message):
                     bot.send_photo(message.chat.id, open(
                         "/script/Sonya/" + answer, "rb"), reply_markup=markup)
                 except:
-                    time.sleep(5)
+                    time.sleep(1)
 
 @bot.message_handler(content_types=['photo'])
 def save_photo(message):
@@ -110,7 +110,7 @@ def save_photo(message):
             try:
                 bot.send_message(message.chat.id, "Фоточка не пришла :( Попробуй ещё раз")
             except:
-                time.sleep(5)
+                time.sleep(1)
     elif (vibor == "Egor"):
         photo.append(fileid)
         if (len(photo) == 1):
@@ -128,7 +128,7 @@ def save_photo(message):
             try:
                 bot.send_message(message.chat.id, "Фоточка не пришла :( Попробуй ещё раз")
             except:
-                time.sleep(5)
+                time.sleep(1)
 
 
 bot.infinity_polling()
