@@ -1,12 +1,11 @@
 import telebot
 import requests
-import os
+import os, os.path
 import random
 from telebot import types
-import files
-import os.path
 from tockenbot import tocken
 import time
+
 
 
 sticker1 = open("/script/sticker.webp", "rb")
@@ -88,8 +87,6 @@ def save_photo(message):
     fileid = message.photo[-1].file_id
     file_info = bot.get_file(fileid)
     photo.clear()
-    global s
-    global e
     with open("/script/id/" + str(message.chat.id) + ".txt", "r") as f:
         f.seek(0)
         vibor = f.readline()
@@ -101,9 +98,8 @@ def save_photo(message):
             respone = requests.get(
                 "https://api.telegram.org/file/bot" + tocken + "/" + file_info.file_path)
             if (respone.status_code == 200):
-                with open("/script/Sonya/" + "Photo_" + str(files.s) + ".jpg", "wb") as f:
+                with open("/script/Sonya/" + "Photo_" + str(len(os.listdir(vibor))) + ".jpg", "wb") as f:
                     f.write(respone.content)
-                    files.s = files.s + 1
             else:
                 bot.send_message(message.chat_id, "Ещё раз")
         else:
@@ -119,9 +115,8 @@ def save_photo(message):
             respone = requests.get(
                 'https://api.telegram.org/file/bot' + tocken + "/" + file_info.file_path)
             if (respone.status_code == 200):
-                with open("/script/Egor/" + "Photo_" + str(files.e) + ".jpg", "wb") as f:
+                with open("/script/Egor/" + "Photo_" + str(len(os.listdir(vibor))) + ".jpg", "wb") as f:
                     f.write(respone.content)
-                    files.e = files.e + 1
             else:
                 bot.send_message(message.chat_id, "Ещё раз")
         else:
@@ -130,5 +125,5 @@ def save_photo(message):
             except:
                 time.sleep(1)
 
-
+ 
 bot.infinity_polling()
